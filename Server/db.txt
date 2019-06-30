@@ -1,0 +1,39 @@
+CREATE TABLE Cars (
+    id INT,
+    mark VARCHAR(40),
+    model VARCHAR(40),
+    year YEAR(4),
+    engine FLOAT,
+    color VARCHAR(40),
+    maxspeed INT,
+    price FLOAT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE Orders (
+    id INT, 
+    idcar INT,
+    type_pay ENUM('credit card','cash'),
+    cust_name VARCHAR(100),
+    cust_surname VARCHAR(100),
+    PRIMARY KEY (id),
+    FOREIGN KEY (idcar) REFERENCES Cars(id)
+);
+
+CREATE TABLE Users (
+    id INT, 
+    username VARCHAR(100),
+    password VARCHAR(100),
+    PRIMARY KEY (id)
+
+);
+
+
+
+INSERT INTO Cars VALUES 
+(1, 'Mercedes', 'S-Class 550', 2008, 5.5, 'black', 220, 40000),
+(2, 'BMW', '650', 1991, 4.4, 'black', 200, 30000),
+(3, 'Toyota', 'Highlander', 2013, 3.5, 'white', 270, 25000),
+(4, 'Peugeot', '308', 2008, 5.0, 'black', 300, 9500),
+(5, 'Renault', 'Master', 2011, 2.3, 'white', 120, 11000),
+(6, 'Audi', 'Allroad A6', 2012, 3.0, 'brown', 200, 47000);
