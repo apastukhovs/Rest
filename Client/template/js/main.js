@@ -7,9 +7,32 @@ let registrationForm = document.getElementById("registration");
 function getCarList() {
     results.style.display = 'block';
     orderForm.style.display = 'none';
-    let url = 'api/cars/.json';
+    let url = 'http://mysite.local/Rest_new/Server/api/cars/getCars';
     $.get(url,  function (data) {
-        showOnTable(data)
+        let table = '<table class="table" id="table">';
+    if (data.Struct.length) {
+        table += '<tr class="row">';
+        table += '<th class="col-lg-1">id</th> <th class="col-lg-4">mark</th> ' +
+            '<th class="col-lg-5">model</th> <th class="col-lg-1"></th> <th class="col-lg-1"></th>';
+        table += '</tr>';
+        for (let i in data.Struct) {
+            let id = data.Struct[i]['id'];
+            table += '<tr class="row">';
+            table += '<td class="col-lg-1">' + id + '</td> <td class="col-lg-4">' +
+            data.Struct[i]['mark'] + '</td> <td class="col-lg-5">' + data.Struct[i]['model'] + '</td>';
+            table += '<td class="col-lg-1">' +
+                '<button type="submit" class="btn btn-primary"' +
+                'onclick="getDetails(' + id + ')">Details</button>' +
+                '</td>';
+            table += '<td class="col-lg-1">' +
+                '<button type="submit" class="btn btn-danger"' +
+                'onclick="getOrderForm(' + id + ')">Order</button>' +
+                '</td>';
+            table += '</tr>';
+        }
+        table += '</table>';
+    }
+    return results.innerHTML = table;
     }, "json");
 }
 

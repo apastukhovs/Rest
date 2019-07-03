@@ -1,0 +1,4 @@
+    
+RewriteEngine On
+RewriteBase /api/
+RewriteRule (.*) http://gfl:8070/REST/server/api/$1 [L]

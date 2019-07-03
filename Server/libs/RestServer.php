@@ -1,7 +1,11 @@
 <?php
+include_once 'Cars.php';
+include_once 'Users.php';
+include_once 'Orders.php';
+include_once '/../config.php';   
+
 class RestServer
 {
-    private $service;
     public function __construct($service)
     {
         try
