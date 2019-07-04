@@ -1,5 +1,8 @@
+<Limit GET POST PUT DELETE>
+    Allow from all
+</Limit>
 RewriteEngine On
-RewriteBase /Rest_new/Server/api/cars/
+RewriteBase /~user4/Rest/Server/api/cars/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^.*$ index.php

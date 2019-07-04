@@ -1,5 +1,5 @@
 <?php
-include_once '/../config.php';
+include_once '/home/user4/public_html/Rest/Server/config.php';
 class Sql
 {
     private $link;

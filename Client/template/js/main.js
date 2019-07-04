@@ -7,7 +7,7 @@ let registrationForm = document.getElementById("registration");
 function getCarList() {
     results.style.display = 'block';
     orderForm.style.display = 'none';
-    let url = 'http://mysite.local/Rest_new/Server/api/cars/getCars';
+    let url = 'http://192.168.0.15//~user4/Rest/Server/api/cars/getCars/.json';
     $.get(url,  function (data) {
         let table = '<table class="table" id="table">';
     if (data.Struct.length) {
@@ -106,7 +106,7 @@ function getOrderForm(id) {
 }
 
 function login(){
-    let url = 'api/users/';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/users/putUsers';
 
     $.ajax({
         url: url,
@@ -121,7 +121,7 @@ function login(){
 }
 
 function logout(){
-    let url = 'api/users/';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/users/deleteUsers';
 
     $.ajax({
         url: url,
@@ -156,7 +156,7 @@ function getRegisterForm(){
 }
 
 function register(){
-    let url = 'api/users/';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/users/postUsers';
     let formData = $('#registrationForm').serializeArray();
     $.post(url, formData, function (data) {
         $('#registration').hide();

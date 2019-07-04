@@ -1,8 +1,8 @@
 <?php
 define("HOSTNAME","127.0.0.1");
-define("USERNAME","root");
-define("PASSWORD","user");
-define("DBNAME","users");
+define("USERNAME","user4");
+define("PASSWORD","user4");
+define("DBNAME","user4");
 define ('ERR_CAR_ID_INVALID','Car id is ivalid!');
 define ('ERR_PAYMENT_TYPE_INVALID','Payment type is ivalid!');
 define ('ERR_CUSTOMER_NAME_EMPTY','Customer name is empty!');

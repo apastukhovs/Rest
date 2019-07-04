@@ -2,7 +2,7 @@
 
 include_once 'Sql.php';
 include_once 'MySql.php';
-include_once '/../config.php';   
+include_once '/home/user4/public_html/Rest/Server/config.php';   
 class Users
 {
     public function getUsers()
