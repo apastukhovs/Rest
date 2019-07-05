@@ -7,38 +7,16 @@ let registrationForm = document.getElementById("registration");
 function getCarList() {
     results.style.display = 'block';
     orderForm.style.display = 'none';
-    let url = 'http://192.168.0.15//~user4/Rest/Server/api/cars/getCars/.json';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/cars/cars';
     $.get(url,  function (data) {
-        let table = '<table class="table" id="table">';
-    if (data.Struct.length) {
-        table += '<tr class="row">';
-        table += '<th class="col-lg-1">id</th> <th class="col-lg-4">mark</th> ' +
-            '<th class="col-lg-5">model</th> <th class="col-lg-1"></th> <th class="col-lg-1"></th>';
-        table += '</tr>';
-        for (let i in data.Struct) {
-            let id = data.Struct[i]['id'];
-            table += '<tr class="row">';
-            table += '<td class="col-lg-1">' + id + '</td> <td class="col-lg-4">' +
-            data.Struct[i]['mark'] + '</td> <td class="col-lg-5">' + data.Struct[i]['model'] + '</td>';
-            table += '<td class="col-lg-1">' +
-                '<button type="submit" class="btn btn-primary"' +
-                'onclick="getDetails(' + id + ')">Details</button>' +
-                '</td>';
-            table += '<td class="col-lg-1">' +
-                '<button type="submit" class="btn btn-danger"' +
-                'onclick="getOrderForm(' + id + ')">Order</button>' +
-                '</td>';
-            table += '</tr>';
-        }
-        table += '</table>';
-    }
-    return results.innerHTML = table;
+        showOnTable(data);
     }, "json");
 }
 
 function getDetails(id) {
-    let url = 'api/cars/'+id+'/.json';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/cars/CarById/'+id;
     $.get(url, function (data) {
+        console.log(data)
         showOnDetails(data)
     }, "json");
 }
@@ -46,7 +24,7 @@ function getDetails(id) {
 function searchCars() {
     results.style.display = 'block';
     orderForm.style.display = 'none';
-    let url = 'api/cars/.json';
+    let url = 'http://192.168.0.15/~user4/Rest/Server/api/cars/CarFilter/'+year;
     let formData = {
         'filter': {
             'mark': $('select[name=mark]').val(),

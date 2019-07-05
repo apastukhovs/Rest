@@ -14,12 +14,12 @@ class Cars
             $id = $params[0];
             if (is_numeric($id))
             {
-                return $this->getById($id);
+                return $this->getCarById($id);
             }
         }
         if (isset($_GET['filter']))
         {
-            return $this->CarFilter($_GET['filter']);
+            return $this->getCarFilter($_GET['filter']);
         }
         try
         {
@@ -32,7 +32,7 @@ class Cars
         }
         return $result->fetchAll(PDO::FETCH_OBJ);
     }
-      private function getById($id)
+    public function getCarById($id)
     {
         
         if ( !$id || !is_numeric($id) || $id<0)
@@ -50,7 +50,7 @@ class Cars
         }
         return $result->fetch(PDO::FETCH_OBJ);
     }
-    public function CarFilter($filter)
+    public function getCarFilter($filter)
     {
         $year = $filter['year'];
         $mark = $filter['mark'];

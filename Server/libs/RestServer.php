@@ -18,21 +18,32 @@ class RestServer
     private function parseMethod($service)
     {
         $this->service = $service;
+        //var_dump($service);
         $url = $_SERVER['REQUEST_URI'];
-        list($b, $c, $s, $a, $d, $db, $table, $path) = explode('/', $url, 8);
-        $params = explode('/', $url, 8);
-        //  list( $c, $s, $a, $d, $db, $table, $path) = explode('/', $url, 7);
-        //  $params = explode('/', $url, 7);
-        $method = $_SERVER['REQUEST_METHOD'];
-        $funcName = ucfirst($table);
-        $funcParams = explode('/', $path);
+        list( $c, $s, $a, $d, $db, $table, $path, $par) = explode('/', $url, 8);
+        $params = explode('/', $url, 8); 
+        $method = $_SERVER['REQUEST_METHOD'];   
+        $funcName = ucfirst($path);
+        //var_dump($funcName);
+        if (stristr($par, '/'))
+        {
+            $funcParams = explode('/', $par);
+        }
+        else $funcParams = $par;
+        //var_dump($par);
         $result = '';
         $viewType = '.json';
+        //var_dump($funcName);
         switch ($method) {
             case 'GET':
-                $viewType = array_pop($funcParams);
-                $viewType = explode('?', $viewType)[0];
+                if (stristr($funcParams, '/')) {
+                    $viewType = array_pop($funcParams);
+                    $viewType = explode('?', $viewType)[0]; 
+                }
+                else  $viewType = '.json';
+                //var_dump($viewType);        
                 $result = $this->setMethod('get' . $funcName, $funcParams);
+                //var_dump($funcParams);
                 break;
             case 'POST':
                 $result = $this->setMethod('post' . $funcName, $funcParams);
@@ -48,13 +59,16 @@ class RestServer
         }
         $this->show_results($result, $viewType);
     }
-    private function setMethod($funcName, $param = false)
+    private function setMethod($funcName, $par = false)
     {
         $ret = false;
+        //var_dump($funcName);
         if (method_exists($this->service, $funcName))
         {
-            $ret = call_user_func([$this->service, $funcName], $param);
+            $ret = call_user_func([$this->service, $funcName], $par);
+            //var_dump($par);
         }
+        
         return $ret;
     }
     private function show_results($result, $viewType = 'json')
